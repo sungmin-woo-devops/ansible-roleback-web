@@ -1,0 +1,9 @@
+---
+# vars file for rollbackplaybook
+# web_rules:
+#   - http
+#   - https
+
+# web_packages: 
+#   - httpd
+#   - mod_ssl

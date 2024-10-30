@@ -1,0 +1,44 @@
+---
+# tasks file for rollbackplaybook
+- name: 배포판 및 버전 점검
+  ansible.builtin.debug:
+    msg: "[점검] CentOS 9 버전에서만 동작합니다."
+  failed_when: |
+    ansible_distribution != "CentOS" or
+    ansible_distribution_version != "9"
+
+- name: 방화벽 포트 제거
+  ansible.posix.firewalld:
+    service: "{{ item }}"
+    permanent: true
+    immediate: true
+    state: disabled
+  loop: "{{ web_rules }}"
+  ignore_errors: true
+
+- name: 방화벽 서비스 중지
+  ansible.builtin.systemd:
+    name: firewalld
+    enabled: false
+    state: stopped
+
+- name: 웹 소스 코드 설정 삭제
+  ansible.builtin.file:
+    path: "/var/www/vhosts/{{ ansible_hostname }}"
+    state: absent
+
+- name: 웹 서버 설정
+  ansible.builtin.file:
+    path: /etc/httpd/conf.d/vhost.conf
+    state: absent
+
+- name: 웹 서비스 중지
+  ansible.builtin.systemd:
+    name: httpd
+    enabled: false
+    state: stopped
+
+- name: 웹 패키지 삭제
+  ansible.builtin.dnf:
+    name: "{{ web_packages }}"
+    state: absent
