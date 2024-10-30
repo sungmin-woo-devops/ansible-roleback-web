@@ -1,14 +1,14 @@
-Role Name
+### Role Name
 =========
 
 rollback_web
 
-Requirements
+### Requirements
 ------------
 ansible
 ansible-galaxy
 
-Role Variables
+### Role Variables
 --------------
 rollback_web
 
@@ -23,11 +23,12 @@ dnf로 설치할 파일을 리스트 형태로 기입합니다.
 (아래 Example Playbook 참고)
 
 
-Dependencies
+### Dependencies
 ------------
 None
 
-Example Playbook
+### Example Playbook
+
 ```yaml
 ----------------
 - name: 웹 서버 설정 복원 역할
@@ -54,10 +55,10 @@ Example Playbook
         msg: 웹 서버 설정 복원 끝
 ```
 
-License
+### License
 -------
 GNU License
 
-Author Information
+### Author Information
 ------------------
 email: sungminwoo.devops@gmail.com
