@@ -28,6 +28,7 @@ Dependencies
 None
 
 Example Playbook
+```yaml
 ----------------
 - name: 웹 서버 설정 복원 역할
   hosts: webservers
@@ -51,6 +52,7 @@ Example Playbook
     - name: 끝 메세지 출력
       ansible.builtin.debug:
         msg: 웹 서버 설정 복원 끝
+```
 
 License
 -------
